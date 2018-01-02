@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+        var socket;
+        function onload() {
+            socket = io.connect();
+            socket.on('emitter', function (data) {
+                document.getElementById('timer').innerHTML = data;
+            })
+        };
+        function submitData() {
+            var data = document.getElementById('inputData').value;
+            socket.emit('submit', data);
+        };
+    </script>
+</head>
+
+<body onload="onload()">
+    <p>Timer: <span id="timer"></span></p>
+    <form action="#">
+        <p>Data: <input type="text" id="inputData" />
+            <input type="button" onClick="submitData()">
+        </p>
+    </form>
+</body>
+
+</html>
